@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export function useStorageState<T>(
   defaultValue: T,
-  key: string
+  key: string,
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
   const [value, setValue] = useState<T>(() => {
     const stickyValue = window.localStorage.getItem(key);

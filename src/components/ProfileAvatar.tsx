@@ -63,7 +63,7 @@ export const ProfileAvatar = ({
                 onError={() => {
                   setUserProfile({ ...userProfile, profilePicture: null });
                   toast.error(
-                    "Не удалось загрузить фото. Проверьте корректность ссылки."
+                    "Не удалось загрузить фото. Проверьте корректность ссылки.",
                   );
                 }}
                 style={{
@@ -153,9 +153,7 @@ export const ProfileAvatar = ({
           <ListItemIcon style={{ color: colorPalette.red }}>
             <Logout />
           </ListItemIcon>
-          <ListItemText style={{ color: colorPalette.red }}>
-            Выйти
-          </ListItemText>
+          <ListItemText style={{ color: colorPalette.red }}>Выйти</ListItemText>
         </StyledMenuItem>
       </Menu>
       <Dialog
@@ -170,7 +168,9 @@ export const ProfileAvatar = ({
         onClose={() => setLogoutDialog(false)}
       >
         <DialogTitle>Ты уверен, что хочешь выйти?</DialogTitle>
-        <DialogContent>Профиль будет сохранён, но вы сойдёте с текущей сессии.</DialogContent>
+        <DialogContent>
+          Профиль будет сохранён, но вы сойдёте с текущей сессии.
+        </DialogContent>
         <DialogActions>
           <Button
             style={{

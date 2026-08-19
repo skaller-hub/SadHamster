@@ -42,7 +42,8 @@ export const StatsInfo = ({ userProfile }: Props) => {
 };
 
 const StatsContainer = styled.div`
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif !important;
+  font-family:
+    Inter, system-ui, Avenir, Helvetica, Arial, sans-serif !important;
   text-align: center;
   & h2 {
     font-size: 28px;

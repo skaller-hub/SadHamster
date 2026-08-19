@@ -13,7 +13,7 @@ import { MainLayout } from "./layouts/MainLayout";
 function App() {
   const [userProfile, setUserProfile] = useStorageState<User>(
     defaultUserProfile,
-    "userProfile"
+    "userProfile",
   );
   const userProfileProps = { userProfile, setUserProfile };
   return (

@@ -55,7 +55,7 @@ export const Quests = ({ userProfile, setUserProfile }: UserProfileProps) => {
   });
 
   const allCompleted = Object.values(questsList).every(
-    (quest) => quest.completed
+    (quest) => quest.completed,
   );
   return (
     <Container>

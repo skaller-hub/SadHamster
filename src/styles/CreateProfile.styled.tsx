@@ -5,7 +5,7 @@ import { colorPalette } from "./theme";
 export const Background = styled.div`
   min-height: 100vh;
   min-width: 100vw;
-  background: linear-gradient(180deg, #1E293B 0%, #334155 50%, #F9A8D4 100%);
+  background: linear-gradient(180deg, #1e293b 0%, #334155 50%, #f9a8d4 100%);
   color: #333;
   display: flex;
   justify-content: center;

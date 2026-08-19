@@ -9,3 +9,4 @@ export { BackButton } from "./BackButton";
 export { VolumeSlider } from "./VolumeSlider";
 export { Quests } from "./Quests";
 export { MonetizationPanel } from "./MonetizationPanel";
+export { QuickBuyRing } from "./QuickBuyRing";

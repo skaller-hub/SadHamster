@@ -35,6 +35,41 @@ export const StagePanel = styled.div`
   text-align: center;
 `;
 
+export const StoryOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.52);
+  backdrop-filter: blur(7px);
+`;
+
+export const StoryDialog = styled.div`
+  width: min(680px, 100%);
+  padding: 28px 24px 24px;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.4);
+`;
+
+export const StoryNextButton = muistyled(Button)({
+  marginTop: "22px",
+  minWidth: "140px",
+  borderRadius: "12px",
+  color: colorPalette.cream,
+  backgroundColor: colorPalette.pink,
+  fontWeight: 800,
+  textTransform: "none",
+  "&:hover": {
+    backgroundColor: "#db2777",
+  },
+});
+
 export const StageTitle = styled.h2`
   margin: 0 0 8px;
   font-size: clamp(1.8rem, 2.4vw, 2.5rem);
@@ -69,9 +104,69 @@ export const ClickContainer = styled.div`
   align-items: center;
   margin-top: 18px;
   position: relative;
+  width: min(520px, 96vw);
+  height: min(520px, 96vw);
   @media only screen and (max-width: 768px) {
     margin-top: 28px;
   }
+`;
+
+export const QuickBuySlot = styled.div`
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+`;
+
+export const QuickBuyButton = muistyled(Button, {
+  shouldForwardProp: (prop) => prop !== "affordable" && prop !== "locked",
+})<{ affordable?: boolean; locked?: boolean }>(({ affordable, locked }) => ({
+  width: "clamp(38px, 9vw, 56px)",
+  height: "clamp(38px, 9vw, 56px)",
+  minWidth: 0,
+  padding: 0,
+  borderRadius: "50%",
+  fontSize: "clamp(1rem, 3.6vw, 1.4rem)",
+  lineHeight: 1,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  pointerEvents: "auto",
+  border: `2px solid ${locked ? "rgba(248,250,252,0.35)" : colorPalette.pink}`,
+  background: locked
+    ? "rgba(15,23,42,0.55)"
+    : affordable
+      ? "linear-gradient(135deg, rgba(250,204,21,0.95), rgba(244,114,182,0.85))"
+      : "rgba(148,163,184,0.28)",
+  opacity: locked ? 0.65 : affordable ? 1 : 0.45,
+  color: colorPalette.cream,
+  boxShadow:
+    affordable && !locked
+      ? "0 0 16px rgba(250,204,21,0.65)"
+      : "0 4px 10px rgba(15,23,42,0.2)",
+  filter: locked ? "grayscale(0.5)" : "none",
+  transition: "transform .2s ease, box-shadow .2s ease, opacity .2s ease",
+  cursor: locked ? "not-allowed" : "pointer",
+  "&:hover": {
+    transform: affordable && !locked ? "scale(1.15)" : undefined,
+  },
+  "&.Mui-disabled": {
+    color: colorPalette.cream,
+  },
+}));
+
+export const QuickBuyLockIcon = styled.span`
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(248, 250, 252, 0.4);
+  font-size: 10px;
 `;
 
 export const ClickImg = styled.img`
@@ -84,15 +179,17 @@ export const ClickImg = styled.img`
 `;
 
 export const ClickButton = muistyled(Button)({
-  width: "280px",
-  height: "280px",
-  minWidth: "280px",
+  width: "min(360px, 82vw)",
+  height: "min(360px, 82vw)",
+  minWidth: "0",
   padding: 0,
   borderRadius: "50%",
   overflow: "hidden",
   border: `6px solid ${colorPalette.pink}`,
-  background: "linear-gradient(135deg, rgba(248,250,252,0.14), rgba(244,114,182,0.12))",
-  boxShadow: "0 0 0 12px rgba(255,255,255,0.08), 0 0 50px rgba(244,114,182,0.42), 0 25px 50px rgba(15,23,42,0.25)",
+  background:
+    "linear-gradient(135deg, rgba(248,250,252,0.14), rgba(244,114,182,0.12))",
+  boxShadow:
+    "0 0 0 12px rgba(255,255,255,0.08), 0 0 50px rgba(244,114,182,0.42), 0 25px 50px rgba(15,23,42,0.25)",
   transition: "all .15s ease-out",
   position: "relative",
   "@media not all and (pointer: coarse)": {
@@ -102,7 +199,8 @@ export const ClickButton = muistyled(Button)({
   },
   "&.clicked": {
     transform: "scale(0.95)",
-    boxShadow: "0 0 0 18px rgba(250,204,21,0.18), 0 0 70px rgba(250,204,21,0.5)",
+    boxShadow:
+      "0 0 0 18px rgba(250,204,21,0.18), 0 0 70px rgba(250,204,21,0.5)",
   },
   "& .MuiTouchRipple-child": {
     backgroundColor: "rgba(250, 204, 21, 0.3)",

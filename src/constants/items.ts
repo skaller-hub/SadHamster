@@ -13,7 +13,8 @@ export const items: { [key: string]: Item } = {
     cost: 20,
     multiplier: 0.5,
     perSecond: 2,
-    description: "Тёплая мягкая подушка, которая помогает хомяку немного расслабиться.",
+    description:
+      "Тёплая мягкая подушка, которая помогает хомяку немного расслабиться.",
     emoji: "🛏️",
   },
 
@@ -22,7 +23,8 @@ export const items: { [key: string]: Item } = {
     cost: 100,
     multiplier: 2,
     perSecond: 5,
-    description: "Грелка с уютным теплом, которая согревает хомяка в самые тоскливые моменты.",
+    description:
+      "Грелка с уютным теплом, которая согревает хомяка в самые тоскливые моменты.",
     emoji: "🧸",
   },
 
@@ -31,7 +33,8 @@ export const items: { [key: string]: Item } = {
     cost: 500,
     multiplier: 5,
     perSecond: 20,
-    description: "Мягкий коврик, на котором хомяк чувствует себя чуть счастливее и спокойнее.",
+    description:
+      "Мягкий коврик, на котором хомяк чувствует себя чуть счастливее и спокойнее.",
     emoji: "🧶",
   },
 
@@ -40,7 +43,8 @@ export const items: { [key: string]: Item } = {
     cost: 1000,
     multiplier: 10,
     perSecond: 30,
-    description: "Пушистый бантик, после которого хомяк смотрит на мир совсем по-другому.",
+    description:
+      "Пушистый бантик, после которого хомяк смотрит на мир совсем по-другому.",
     emoji: "🎀",
   },
 
@@ -49,7 +53,8 @@ export const items: { [key: string]: Item } = {
     cost: 2500,
     multiplier: 25,
     perSecond: 50,
-    description: "Мягкая пелёнка, в которой хомяк чувствует себя защищённым и любимым.",
+    description:
+      "Мягкая пелёнка, в которой хомяк чувствует себя защищённым и любимым.",
     emoji: "🧣",
   },
 
@@ -58,7 +63,8 @@ export const items: { [key: string]: Item } = {
     cost: 5000,
     multiplier: 50,
     perSecond: 100,
-    description: "Тёплый ночник помогает хомяку меньше бояться темноты и одиночества.",
+    description:
+      "Тёплый ночник помогает хомяку меньше бояться темноты и одиночества.",
     emoji: "💡",
   },
 
@@ -67,7 +73,8 @@ export const items: { [key: string]: Item } = {
     cost: 12500,
     multiplier: 75,
     perSecond: 180,
-    description: "Самый вкусный кусочек счастья, который делает хомяка чуть более счастливым.",
+    description:
+      "Самый вкусный кусочек счастья, который делает хомяка чуть более счастливым.",
     emoji: "🧀",
   },
 
@@ -85,7 +92,8 @@ export const items: { [key: string]: Item } = {
     cost: 100000,
     multiplier: 500,
     perSecond: 1000,
-    description: "Уютный наряд, который напоминает хомяку, что он тоже заслуживает тепло.",
+    description:
+      "Уютный наряд, который напоминает хомяку, что он тоже заслуживает тепло.",
     emoji: "🧥",
   },
 
@@ -94,7 +102,8 @@ export const items: { [key: string]: Item } = {
     cost: 500000,
     multiplier: 1000,
     perSecond: 2000,
-    description: "Небольшой домик, где хомяк может укрыться от тревоги и просто быть собой.",
+    description:
+      "Небольшой домик, где хомяк может укрыться от тревоги и просто быть собой.",
     emoji: "🏡",
   },
 
@@ -112,7 +121,8 @@ export const items: { [key: string]: Item } = {
     cost: 2500000,
     multiplier: 3000,
     perSecond: 7500,
-    description: "Пушистая игрушка, от которой хомяк не может оторвать глаз и начинает улыбаться.",
+    description:
+      "Пушистая игрушка, от которой хомяк не может оторвать глаз и начинает улыбаться.",
     emoji: "🧸",
   },
 
@@ -121,7 +131,8 @@ export const items: { [key: string]: Item } = {
     cost: 5000000,
     multiplier: 5000,
     perSecond: 10000,
-    description: "Пуховая кровать, в которой хочется забыть грусть и просто спать спокойно.",
+    description:
+      "Пуховая кровать, в которой хочется забыть грусть и просто спать спокойно.",
     emoji: "🛏️",
   },
 
@@ -130,7 +141,8 @@ export const items: { [key: string]: Item } = {
     cost: 10000000,
     multiplier: 7500,
     perSecond: 15000,
-    description: "Целый день радости, сыра и общения, которого так не хватало хомяку.",
+    description:
+      "Целый день радости, сыра и общения, которого так не хватало хомяку.",
     emoji: "🎉",
   },
 
@@ -139,7 +151,8 @@ export const items: { [key: string]: Item } = {
     cost: 25000000,
     multiplier: 10000,
     perSecond: 20000,
-    description: "Небесный свет на потолке, который помогает хомяку слушать тишину и мечтать.",
+    description:
+      "Небесный свет на потолке, который помогает хомяку слушать тишину и мечтать.",
     emoji: "🌌",
   },
 
@@ -148,7 +161,8 @@ export const items: { [key: string]: Item } = {
     cost: 50000000,
     multiplier: 15000,
     perSecond: 30000,
-    description: "Лучшая миска для угощений — хомяк сияет от счастья при виде неё.",
+    description:
+      "Лучшая миска для угощений — хомяк сияет от счастья при виде неё.",
     emoji: "🥣",
   },
 
@@ -157,7 +171,8 @@ export const items: { [key: string]: Item } = {
     cost: 100000000,
     multiplier: 25000,
     perSecond: 50000,
-    description: "Яркий свет, который напоминает хомяку, что он не один и всё хорошо.",
+    description:
+      "Яркий свет, который напоминает хомяку, что он не один и всё хорошо.",
     emoji: "💎",
   },
 
@@ -166,7 +181,8 @@ export const items: { [key: string]: Item } = {
     cost: 500000000,
     multiplier: 50000,
     perSecond: 100000,
-    description: "Небольшой сырный рай, где хомяк наконец получает то, о чём мечтал.",
+    description:
+      "Небольшой сырный рай, где хомяк наконец получает то, о чём мечтал.",
     emoji: "🧀",
   },
   happinessPark: {
@@ -174,7 +190,8 @@ export const items: { [key: string]: Item } = {
     cost: 1000000000,
     multiplier: 150000,
     perSecond: 350000,
-    description: "Полный уютных мест и тёплых неожиданностей, где хомяк чувствует себя по-настоящему живым.",
+    description:
+      "Полный уютных мест и тёплых неожиданностей, где хомяк чувствует себя по-настоящему живым.",
     emoji: "🌼",
   },
   happyMomentsMuseum: {
@@ -182,7 +199,8 @@ export const items: { [key: string]: Item } = {
     cost: 5000000000,
     multiplier: 750000,
     perSecond: 1500000,
-    description: "Место, где собираются все маленькие победы, открывшие хомяку дорогу к радости.",
+    description:
+      "Место, где собираются все маленькие победы, открывшие хомяку дорогу к радости.",
     emoji: "🏛️",
   },
   heroStatue: {
@@ -198,7 +216,8 @@ export const items: { [key: string]: Item } = {
     cost: 50000000000,
     multiplier: 10000000,
     perSecond: 250000000,
-    description: "Хомяк, который научился писать код, улыбаться и помогать другим быть счастливее.",
+    description:
+      "Хомяк, который научился писать код, улыбаться и помогать другим быть счастливее.",
     emoji: "🐹💻",
   },
 };

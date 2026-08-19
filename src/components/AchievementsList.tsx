@@ -11,7 +11,7 @@ interface Props {
 
 export const AchievementsList = ({ userProfile }: Props) => {
   const unlockedAchievements = Object.values(achievements).filter(
-    (achievement) => userProfile.achievements.includes(achievement.name)
+    (achievement) => userProfile.achievements.includes(achievement.name),
   );
   const lockedAchievementsCount =
     Object.values(achievements).length - unlockedAchievements.length;
@@ -41,10 +41,10 @@ export const AchievementsList = ({ userProfile }: Props) => {
             achievement.clicksRequired
               ? achievement.clicksRequired + " кликов"
               : achievement.requirement
-              ? achievement.requirement + " сыркоинов"
-              : achievement.purchasesRequired
-              ? achievement.purchasesRequired + " покупок"
-              : achievement.description
+                ? achievement.requirement + " сыркоинов"
+                : achievement.purchasesRequired
+                  ? achievement.purchasesRequired + " покупок"
+                  : achievement.description
           }`}
         >
           <ItemWrapper>
@@ -68,10 +68,10 @@ export const AchievementsList = ({ userProfile }: Props) => {
                 {userProfile.dateAchievements && (
                   <DateText>
                     {new Date(
-                      userProfile.dateAchievements[achievement.name]
+                      userProfile.dateAchievements[achievement.name],
                     ).toLocaleDateString()}{" "}
                     {new Date(
-                      userProfile.dateAchievements[achievement.name]
+                      userProfile.dateAchievements[achievement.name],
                     ).toLocaleTimeString()}
                   </DateText>
                 )}

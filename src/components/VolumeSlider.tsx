@@ -20,10 +20,10 @@ export const VolumeSlider = ({
 }: VolumeSliderProps) => {
   const musicRef = useRef<HTMLAudioElement | null>(null);
   const [previousValue, setPreviousValue] = useState<number>(
-    defaultUserProfile.audioVolume
+    defaultUserProfile.audioVolume,
   );
   const [previousMusicValue, setPreviousMusicValue] = useState<number>(
-    defaultUserProfile.musicVolume
+    defaultUserProfile.musicVolume,
   );
   const musicVolume = userProfile.musicVolume ?? defaultUserProfile.musicVolume;
 
@@ -31,11 +31,15 @@ export const VolumeSlider = ({
     const music = new Audio(isVictory ? WinerMusic : SadHamsterMusic);
     music.loop = true;
     music.volume = musicVolume;
+    music.autoplay = true;
     musicRef.current = music;
 
     const startMusic = () => {
+      if (musicVolume <= 0) return;
       void music.play().catch(() => undefined);
     };
+
+    startMusic();
 
     document.addEventListener("pointerdown", startMusic, { once: true });
     document.addEventListener("touchstart", startMusic, { once: true });
@@ -53,6 +57,9 @@ export const VolumeSlider = ({
   useEffect(() => {
     if (musicRef.current) {
       musicRef.current.volume = musicVolume;
+      if (musicVolume > 0) {
+        void musicRef.current.play().catch(() => undefined);
+      }
     }
   }, [musicVolume]);
 
@@ -113,7 +120,7 @@ export const VolumeSlider = ({
   const handleMusicMuteClick = () => {
     handleMusicChange(
       {} as Event,
-      musicVolume === 0 ? previousMusicValue || 0.5 : 0
+      musicVolume === 0 ? previousMusicValue || 0.5 : 0,
     );
   };
 
@@ -138,8 +145,17 @@ export const VolumeSlider = ({
       }}
     >
       <VolumeControl label="Эффекты">
-        <Tooltip title={userProfile.audioVolume === 0 ? "Включить эффекты" : "Выключить эффекты"}>
-          <IconButton sx={{ color: colorPalette.slate900 }} onClick={handleMuteClick}>
+        <Tooltip
+          title={
+            userProfile.audioVolume === 0
+              ? "Включить эффекты"
+              : "Выключить эффекты"
+          }
+        >
+          <IconButton
+            sx={{ color: colorPalette.slate900 }}
+            onClick={handleMuteClick}
+          >
             {userProfile.audioVolume === 0 ? (
               <VolumeOff />
             ) : userProfile.audioVolume <= 0.5 ? (
@@ -150,7 +166,11 @@ export const VolumeSlider = ({
           </IconButton>
         </Tooltip>
         <Slider
-          sx={{ width: "78px", padding: "6px 0", "@media (max-width: 700px)": { width: "58px" } }}
+          sx={{
+            width: "78px",
+            padding: "6px 0",
+            "@media (max-width: 700px)": { width: "58px" },
+          }}
           aria-label="Громкость эффектов"
           value={userProfile.audioVolume}
           min={0}
@@ -162,7 +182,9 @@ export const VolumeSlider = ({
         />
       </VolumeControl>
       <VolumeControl label="Музыка" className="music-control">
-        <Tooltip title={musicVolume === 0 ? "Включить музыку" : "Выключить музыку"}>
+        <Tooltip
+          title={musicVolume === 0 ? "Включить музыку" : "Выключить музыку"}
+        >
           <IconButton
             sx={{ color: colorPalette.slate900 }}
             onClick={handleMusicMuteClick}
@@ -171,7 +193,11 @@ export const VolumeSlider = ({
           </IconButton>
         </Tooltip>
         <Slider
-          sx={{ width: "78px", padding: "6px 0", "@media (max-width: 700px)": { width: "58px" } }}
+          sx={{
+            width: "78px",
+            padding: "6px 0",
+            "@media (max-width: 700px)": { width: "58px" },
+          }}
           aria-label="Громкость музыки"
           value={musicVolume}
           min={0}
@@ -185,7 +211,6 @@ export const VolumeSlider = ({
     </Stack>
   );
 };
-
 
 const VolumeControl = ({
   label,
@@ -208,7 +233,9 @@ const VolumeControl = ({
       ":hover": { background: "rgba(255, 255, 255, 0.24)" },
     }}
   >
-    <strong style={{ color: colorPalette.slate900, fontSize: "0.72rem" }}>{label}</strong>
+    <strong style={{ color: colorPalette.slate900, fontSize: "0.72rem" }}>
+      {label}
+    </strong>
     <Stack direction="row" spacing={1} alignItems="center">
       {children}
     </Stack>

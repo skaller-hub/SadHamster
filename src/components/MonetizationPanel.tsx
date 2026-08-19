@@ -19,7 +19,8 @@ export const MonetizationPanel = ({
     ? new Date(userProfile.dailyBonusClaimedAt).toDateString() ===
       new Date().toDateString()
     : false;
-  const hasCosmetic = userProfile.unlockedCosmetics?.includes("warm-frame") ?? false;
+  const hasCosmetic =
+    userProfile.unlockedCosmetics?.includes("warm-frame") ?? false;
 
   const addCoins = (amount: number) => {
     const points = userProfile.points + amount;
@@ -35,7 +36,10 @@ export const MonetizationPanel = ({
     setUserProfile({
       ...userProfile,
       points: userProfile.points + DAILY_BONUS,
-      maxPoints: Math.max(userProfile.maxPoints, userProfile.points + DAILY_BONUS),
+      maxPoints: Math.max(
+        userProfile.maxPoints,
+        userProfile.points + DAILY_BONUS,
+      ),
       dailyBonusClaimedAt: new Date().toISOString(),
     });
     toast.success(`Ежедневный подарок: +${formatNumber(DAILY_BONUS)} 🧀`);
@@ -73,23 +77,42 @@ export const MonetizationPanel = ({
       <Offers>
         <Offer>
           <OfferTitle>Ежедневный подарок</OfferTitle>
-          <OfferText>Возвращайся каждый день и получай {formatNumber(DAILY_BONUS)} сыркоинов.</OfferText>
+          <OfferText>
+            Возвращайся каждый день и получай {formatNumber(DAILY_BONUS)}{" "}
+            сыркоинов.
+          </OfferText>
           <ActionButton disabled={claimedToday} onClick={claimDailyBonus}>
             {claimedToday ? "Уже получен" : "Забрать подарок"}
           </ActionButton>
         </Offer>
         <Offer>
-          <OfferTitle>Rewarded-реклама</OfferTitle>
-          <OfferText>Демонстрация просмотра рекламы с наградой, без подключения рекламной сети.</OfferText>
-          <ActionButton disabled={isWatching || videoCooldown} onClick={watchRewardedVideo}>
-            {isWatching ? "Идёт просмотр..." : videoCooldown ? "Доступно через 30 сек" : `Смотреть за +${formatNumber(VIDEO_REWARD)} 🧀`}
+          <OfferTitle>Сыркоин за рекламу</OfferTitle>
+          <OfferText>
+            Здесь могла бы быть ваша реклама. Демонстрация просмотра рекламы с наградой. 
+          </OfferText>
+          <ActionButton
+            disabled={isWatching || videoCooldown}
+            onClick={watchRewardedVideo}
+          >
+            {isWatching
+              ? "Идёт просмотр..."
+              : videoCooldown
+                ? "Доступно через 30 сек"
+                : `Смотреть за +${formatNumber(VIDEO_REWARD)} 🧀`}
           </ActionButton>
         </Offer>
         <Offer>
           <OfferTitle>Косметический премиум</OfferTitle>
-          <OfferText>Эксклюзивная рамка для профиля за заработанные сыркоины.</OfferText>
-          <ActionButton disabled={hasCosmetic || userProfile.points < COSMETIC_COST} onClick={unlockCosmetic}>
-            {hasCosmetic ? "Разблокировано" : `Открыть за ${formatNumber(COSMETIC_COST)} 🧀`}
+          <OfferText>
+            Эксклюзивная рамка для профиля за заработанные сыркоины.
+          </OfferText>
+          <ActionButton
+            disabled={hasCosmetic || userProfile.points < COSMETIC_COST}
+            onClick={unlockCosmetic}
+          >
+            {hasCosmetic
+              ? "Разблокировано"
+              : `Открыть за ${formatNumber(COSMETIC_COST)} 🧀`}
           </ActionButton>
         </Offer>
       </Offers>
@@ -110,6 +133,7 @@ const Panel = styled.section`
 const PanelTitle = styled.h2`
   margin: 0;
   font-size: 1.35rem;
+  text-align: center;
 `;
 
 const PanelSubtitle = styled.p`

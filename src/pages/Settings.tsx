@@ -81,8 +81,7 @@ export const Settings = ({ userProfile, setUserProfile }: UserProfileProps) => {
   const handleSaveNameClick = () => {
     if (name.length < 4) {
       setNameError("Минимум 4 символа");
-    } else if (name.length > 16)
-      setNameError("Максимум 16 символов");
+    } else if (name.length > 16) setNameError("Максимум 16 символов");
     else if (name === userProfile.name) {
       toast.error("Новое имя должно отличаться от старого");
     } else {
@@ -180,11 +179,7 @@ export const Settings = ({ userProfile, setUserProfile }: UserProfileProps) => {
         <br />
         {name !== "" && (
           <>
-            <SaveButton
-              onClick={handleSaveNameClick}
-            >
-              Сохранить
-            </SaveButton>
+            <SaveButton onClick={handleSaveNameClick}>Сохранить</SaveButton>
             <br />
           </>
         )}
@@ -280,7 +275,9 @@ export const Settings = ({ userProfile, setUserProfile }: UserProfileProps) => {
         onClose={() => setLogoutDialog(false)}
       >
         <DialogTitle>Ты уверен, что хочешь выйти?</DialogTitle>
-        <DialogContent>Профиль будет сохранён, но сессия завершится.</DialogContent>
+        <DialogContent>
+          Профиль будет сохранён, но сессия завершится.
+        </DialogContent>
         <DialogActions>
           <Button
             style={{

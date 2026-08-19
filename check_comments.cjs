@@ -23,10 +23,10 @@ for (const file of files) {
   const content = fs.readFileSync(file, "utf8");
   const lines = content.split("\r\n").join("\n").split("\n");
   lines.forEach((line, index) => {
-    if (line.includes("/// <reference types=\"vite/client\" />")) {
+    if (line.includes('/// <reference types="vite/client" />')) {
       return;
     }
-    
+
     let hasSingleLineComment = false;
     let idx = line.indexOf("//");
     while (idx !== -1) {
@@ -37,10 +37,10 @@ for (const file of files) {
       hasSingleLineComment = true;
       break;
     }
-    
+
     const hasBlockStart = line.includes("/*");
     const hasBlockEnd = line.includes("*/");
-    
+
     if (hasSingleLineComment || hasBlockStart || hasBlockEnd) {
       console.log("[" + file + ":" + (index + 1) + "]: " + line.trim());
     }

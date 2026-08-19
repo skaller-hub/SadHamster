@@ -40,11 +40,13 @@ export const Navbar = ({ userProfile, setUserProfile }: Props) => {
     }
 
     if (navigator.share) {
-      await navigator.share({
-        title: "Sad Hamster: Путь к Счастью",
-        text: "Помоги хомяку пройти путь от одиночества к счастью через клики, уют и маленькие радости.",
-        url: window.location.href,
-      }).catch(() => undefined);
+      await navigator
+        .share({
+          title: "Sad Hamster: Путь к Счастью",
+          text: "Помоги хомяку пройти путь от одиночества к счастью через клики, уют и маленькие радости.",
+          url: window.location.href,
+        })
+        .catch(() => undefined);
     }
   };
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   CreateProfile,
   StatsInfo,
@@ -6,6 +6,7 @@ import {
   BackToTop,
   Quests,
   MonetizationPanel,
+  QuickBuyRing,
 } from "../components";
 import {
   ClickButton,
@@ -18,6 +19,9 @@ import {
   StageTitle,
   StageBadge,
   StageStory,
+  StoryOverlay,
+  StoryDialog,
+  StoryNextButton,
   FloatingGain,
   ClickHint,
 } from "../styles";
@@ -105,15 +109,28 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
   const [showClickHint, setShowClickHint] = useState<boolean>(true);
   const [lastClickAt, setLastClickAt] = useState<number>(Date.now());
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const [floatingGains, setFloatingGains] = useState<Array<{ id: number; value: number; left: number; top: number }>>([]);
+  const [isStoryOpen, setIsStoryOpen] = useState<boolean>(true);
+  const viewedStages = useRef<Set<string>>(new Set());
+  const [floatingGains, setFloatingGains] = useState<
+    Array<{ id: number; value: number; left: number; top: number }>
+  >([]);
   const isOnline = useOnlineStatus();
 
   const currentStage =
-    STAGES.filter((stage) => userProfile.points >= stage.min && userProfile.points < stage.max)[0] ||
-    STAGES[STAGES.length - 1];
+    STAGES.filter(
+      (stage) =>
+        userProfile.points >= stage.min && userProfile.points < stage.max,
+    )[0] || STAGES[STAGES.length - 1];
 
   const stageBackground = currentStage.background;
   const stageImage = currentStage.image;
+
+  useEffect(() => {
+    if (!viewedStages.current.has(currentStage.title)) {
+      viewedStages.current.add(currentStage.title);
+      setIsStoryOpen(true);
+    }
+  }, [currentStage.title]);
 
   const handleClick = () => {
     setShowClickHint(false);
@@ -128,7 +145,12 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
     const id = Date.now() + Math.random();
     setFloatingGains((prev) => [
       ...prev,
-      { id, value: gain, left: 50 + (Math.random() * 12 - 6), top: 18 + Math.random() * 18 },
+      {
+        id,
+        value: gain,
+        left: 50 + (Math.random() * 12 - 6),
+        top: 18 + Math.random() * 18,
+      },
     ]);
     setTimeout(() => {
       setFloatingGains((prev) => prev.filter((item) => item.id !== id));
@@ -145,7 +167,7 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
       (achievement) =>
         achievement.clicksRequired !== undefined &&
         clicks + 1 >= achievement.clicksRequired &&
-        !userProfile.achievements.includes(achievement.name)
+        !userProfile.achievements.includes(achievement.name),
     );
 
     if (unlockedClickAchievements.length > 0) {
@@ -197,7 +219,7 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
         achievement.requirement !== undefined &&
         newMaxPoints >= achievement.requirement &&
         userProfile.maxPoints < achievement.requirement &&
-        !userProfile.achievements.includes(achievement.name)
+        !userProfile.achievements.includes(achievement.name),
     );
 
     if (unlockedAchievements.length > 0) {
@@ -239,7 +261,10 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
   useEffect(() => {
     if (userProfile.name !== null) {
       const intervalId = setInterval(() => {
-        const pointsPerSecond = (userProfile.points + userProfile.perSecond / 100).toFixed(3);
+        const pointsPerSecond = (
+          userProfile.points +
+          userProfile.perSecond / 100
+        ).toFixed(3);
         handleAddPoints(Number(pointsPerSecond));
       }, 10);
 
@@ -266,11 +291,18 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
       ) : (
         <>
           <GameShell background={stageBackground}>
-            <StagePanel>
-              <StageBadge>{currentStage.resource}</StageBadge>
-              <StageTitle>{currentStage.title}</StageTitle>
-              <StageStory>{currentStage.story}</StageStory>
-            </StagePanel>
+            {isStoryOpen && (
+              <StoryOverlay role="dialog" aria-modal="true">
+                <StoryDialog>
+                  <StageBadge>{currentStage.resource}</StageBadge>
+                  <StageTitle>{currentStage.title}</StageTitle>
+                  <StageStory>{currentStage.story}</StageStory>
+                  <StoryNextButton onClick={() => setIsStoryOpen(false)}>
+                    Далее
+                  </StoryNextButton>
+                </StoryDialog>
+              </StoryOverlay>
+            )}
 
             <ClickContainer onTouchStart={(e) => e.preventDefault()}>
               <Points show={showAddedPoints}>+{addedPoints}</Points>
@@ -280,31 +312,31 @@ export const Game = ({ userProfile, setUserProfile }: UserProfileProps) => {
                 </FloatingGain>
               ))}
               {showClickHint && <ClickHint>КЛИК</ClickHint>}
+              <QuickBuyRing
+                userProfile={userProfile}
+                setUserProfile={setUserProfile}
+              />
               <ClickButton
                 aria-label={currentStage.button}
                 className={isClicked ? "clicked" : ""}
                 onClick={handleClick}
                 onTouchStart={(e) => e.preventDefault()}
               >
-                <ClickImg draggable="false" src={stageImage} alt={currentStage.title} />
+                <ClickImg
+                  draggable="false"
+                  src={stageImage}
+                  alt={currentStage.title}
+                />
               </ClickButton>
             </ClickContainer>
-
-            <StagePanel style={{ marginTop: "22px", maxWidth: "560px" }}>
-              <StageTitle style={{ fontSize: "1.5rem", marginBottom: "10px" }}>
-                {currentStage.button}
-              </StageTitle>
-              <StageStory>
-                {currentStage.title} • {currentStage.resource} • {compactFormat(userProfile.points)}
-              </StageStory>
-            </StagePanel>
 
             <StatsInfo userProfile={userProfile} />
             <MonetizationPanel {...userProfileProps} />
             <Shop {...userProfileProps} />
             {!isOnline && (
               <Offline>
-                <WifiOff /> &nbsp; Ты <span>офлайн</span>, но всё ещё можешь помогать хомяку!
+                <WifiOff /> &nbsp; Ты <span>офлайн</span>, но всё ещё можешь
+                помогать хомяку!
               </Offline>
             )}
             <BackToTop />

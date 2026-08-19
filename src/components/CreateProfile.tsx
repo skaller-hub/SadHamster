@@ -29,8 +29,7 @@ export const CreateProfile = ({
   const handleSetUserProfile = () => {
     if (inputValue.length < 4) {
       setErrorMessage("Минимум 4 символа");
-    } else if (inputValue.length > 16)
-      setErrorMessage("Максимум 16 символов");
+    } else if (inputValue.length > 16) setErrorMessage("Максимум 16 символов");
     else {
       setUserProfile({
         ...userProfile,
@@ -92,7 +91,9 @@ export const CreateProfile = ({
           onKeyDown={(e) => e.key === "Enter" && handleSetUserProfile()}
         />
         <br />
-        <CreateButton onClick={handleSetUserProfile}>Сохранить профиль</CreateButton>
+        <CreateButton onClick={handleSetUserProfile}>
+          Сохранить профиль
+        </CreateButton>
       </FormContainer>
     </>
   );
