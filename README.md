@@ -1,6 +1,12 @@
 ## Sad Hamster
 
 Sad Hamster: «Путь к Счастью» — браузерная clicker-игра на React, где игрок помогает хомяку пройти пять стадий от одиночества до абсолютного счастья.
+## Скриншоты
+<img width="1893" height="893" alt="Снимок экрана (41)" src="https://github.com/user-attachments/assets/264b5c0e-783b-482f-b771-3652c3d9cb58" />
+<img width="1896" height="900" alt="Снимок экрана (40)" src="https://github.com/user-attachments/assets/806efced-86d6-486a-b0fd-08e4306da19d" />
+<img width="1895" height="898" alt="Снимок экрана (42)" src="https://github.com/user-attachments/assets/73d68f8e-9688-4cce-b9bb-f315de82cc4b" />
+<img width="1895" height="901" alt="Снимок экрана (39)" src="https://github.com/user-attachments/assets/12d6a27f-16e0-4cc4-b6e1-3801d5ef9857" />
+
 
 ## Основной функционал
 
